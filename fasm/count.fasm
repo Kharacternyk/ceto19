@@ -1,4 +1,9 @@
+; The number of arguments to proccess.
     count=1000000
+
+; Put the start of arguments chunk into rax.
+    sub rax, 1
+    imul rax, count
 
 ; Fill `cubes` array.
     cubes=buffer
@@ -23,12 +28,6 @@
         inc r15
         cmp r15, count
         jna zerLoop
-
-; Prepare registers with some char codes.
-    mov rdi, 9
-    imul rdi, rdi, -1
-    mov rdx, 10
-    imul rdx, rdx, -1
 
 ; Check every combination, x>=y>=z.
     mov r12, 1 ; x

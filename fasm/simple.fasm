@@ -12,11 +12,8 @@
 ; Store the highest index.
     mov rcx, rdi
 
-; Prepare registers with some char codes.
-    mov rdi, 9
-    imul rdi, rdi, -1
-    mov rdx, 10
-    imul rdx, rdx, -1
+; Counter.
+    zer r9
 
 ; Check every combination, x>=y>=z.
     mov r15, rax
@@ -31,12 +28,13 @@
                 add rbx, [cubes+r14*8]
                 cmp rbx, r15
                 jne @f
-                push rdx
+                push LF
                 push r12
-                push rdi
+                push TAB
                 push r13
-                push rdi
+                push TAB
                 push r14
+                inc r9
             @@: inc r14
                 cmp r14, r13
                 jna zLoop
@@ -46,3 +44,7 @@
         inc r12
         cmp r12, rcx
         jna xLoop
+
+; Push a counter.
+    push LF
+    push r9

@@ -12,10 +12,6 @@
 ; Store the highest register.
     mov rbx, rdi
 
-; Prepare registers with some char codes.
-    mov rdx, 10
-    imul rdx, rdx, -1
-
 ; Counter.
     zer rcx
 
@@ -45,5 +41,5 @@
         jna xLoop
 
 ; Output.
-    push rdx
+    push LF
     push rcx

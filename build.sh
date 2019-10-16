@@ -1,5 +1,5 @@
 #!/bin/sh
-
+cd fasm
 if [ ! -f "$1.fasm" ]; then
     echo >&2 "There isn't any files named '$1.fasm'"
     exit 1
@@ -10,6 +10,6 @@ if [ ! -d "bin" ]; then
 fi
 
 ln -s "$1.fasm" "body.fasm"
-fasm "wrapper.fasm" "bin/$1"
+fasm "wrapper.fasm" "../bin/$1"
 rm "body.fasm"
-chmod +x "bin/$1"
+chmod +x "../bin/$1"

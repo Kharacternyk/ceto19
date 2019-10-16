@@ -17,6 +17,9 @@ common
     syscall
 }
 
+LF equ -10
+TAB equ -9
+
 segment executable readable
 entry $
 
