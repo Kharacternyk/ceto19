@@ -10,6 +10,6 @@ while [ 0 -eq 0 ]; do
         echo $results
         exit
     fi
-    echo no results at million $million
+    echo >&2 no results at million $million
     million=$((million+1))
 done
