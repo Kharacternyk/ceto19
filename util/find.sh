@@ -1,5 +1,5 @@
 #!/bin/sh
-million=1
+million=$2
 while [ 0 -eq 0 ]; do
     file="results/${million}million"
     if [ ! -f $file ]; then
