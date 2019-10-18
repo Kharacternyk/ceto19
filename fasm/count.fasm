@@ -1,21 +1,30 @@
 ; The number of arguments to proccess.
     count=1000000
 
-; Put the start of arguments chunk into rax.
+; Put the start of the arguments chunk into rax.
     sub rax, 1
     imul rax, count
+
+; The lowest x that should be checked.
+    mov r9, 1
 
 ; Fill `cubes` array.
     cubes=buffer
     zer rdi
-@@: inc rdi
+cubesLoop:
+    inc rdi
     mov rbx, rdi
     imul rbx, rdi; ^2
     imul rbx, rdi; ^3
     mov [cubes+rdi*8], rbx
-    sub rbx, count
+    mov rcx, rbx
+    imul rcx, 3
+    cmp rcx, rax
+    ja @f
+    mov r9, rdi
+@@: sub rbx, count
     cmp rbx, rax
-    jl @b
+    jl cubesLoop
 
 ; Store the highest index.
     mov rcx, rdi
@@ -30,7 +39,7 @@
         jna zerLoop
 
 ; Check every combination, x>=y>=z.
-    mov r12, 1 ; x
+    mov r12, r9 ; x
     xLoop:
         mov r13, 1 ; y
         yLoop:
@@ -42,9 +51,9 @@
 
                 sub r15, rax
                 cmp r15, 0
-                jb @f
+                jl @f
                 cmp r15, count
-                ja @f
+                jg @f
 
                 inc byte [results+r15]
 
@@ -64,9 +73,9 @@
         movzx rbx, byte [results+r8]
         cmp rbx, 0
         je @f
-        push rdx
+        push LF
         push rbx
-        push rdi
+        push TAB
         mov r9, rax
         add r9, r8
         push r9
