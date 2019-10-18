@@ -9,7 +9,7 @@
     cmp rbx, rax
     jb @b
 
-; Store the highest register.
+; Store the highest index.
     mov rbx, rdi
 
 ; Counter.

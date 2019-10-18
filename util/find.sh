@@ -7,9 +7,9 @@ while [ 0 -eq 0 ]; do
     fi
     results=$(cat $file | grep "$1\$" | tail -n 1)
     if [ ! -z "$results" ]; then
-        echo $results
+        echo "$results"
         exit
     fi
-    echo >&2 no results at million $million
+    echo >&2 No results at million $million.
     million=$((million+1))
 done
